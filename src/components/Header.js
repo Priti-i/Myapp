@@ -16,9 +16,9 @@ const Header = () => {
             <Link to="/Contact"><li>Contact</li></Link>
           </ul>
         </div>
-       {(isLogin)?
-        (<button onClick={()=>setisLogin(false)}>Logout</button>):
-        (<button onClick={()=>setisLogin(true)}>Login</button>)}
+       {(isLogin)
+        ?(<button onClick={()=>setisLogin(false)}>Logout</button>)
+        :(<button onClick={()=>setisLogin(true)}>Login</button>)}
       </div>
     </>
   );

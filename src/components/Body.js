@@ -2,16 +2,17 @@ import React, { useState,useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import  {restaurantList} from "./config.js";
 import CartItem from "./Cartitem.js";
-function filterData(searchText,RestoList)
- {
-  const r1=RestoList.filter((resturant) =>{
-    resturant.data.name.includes(searchText)}
+import Shimmer from "./Shimmer.js";
+function filterData(searchText, restaurants) {
+  const filtered = restaurants.filter((restaurant) =>
+    restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
   );
-  return r1;
+  return filtered;
 }
 const Body=()=>{
     
-    const [RestoList,setRestoList]=useState([]);
+    const [allResto,setallResto]=useState([]);
+    const [filterRestoList,setfilterRestoList]=useState([]);
      const[searchText,setSearchText]=useState();
      useEffect(()=>{
       getResto();
@@ -20,10 +21,15 @@ const Body=()=>{
      async function getResto() {
       const data = await fetch("https://food-api-beta.vercel.app/service");
       const json = await data.json();
-      console.log(json[0].data.name);  // Inspect the API response structure
-      setRestoList(json);  // Adjust based on the actual API structure
+      // console.log(json[0].data.name);  // Inspect the API response structure
+      setallResto(json);  // Adjust based on the actual API structure
+      setfilterRestoList(json);
     }
- return(
+    if(!allResto) return null;  // not render component
+
+    
+
+ return (allResto.length===0)?(<Shimmer/>):(
     <>
     <div className="search">
     <input type="text" placeholder="search"  
@@ -32,14 +38,15 @@ const Body=()=>{
     />
     </div>
     <button onClick={()=>{
-        const result=filterData(searchText,RestoList);
-        setRestoList(result);
+        const result=filterData(searchText,allResto);
+        setfilterRestoList(result);
     }}>search</button>
    
     
     <div className="cardView">
     {
-        RestoList.map((resturant)=>{
+        filterRestoList.map((resturant)=>{
+          
         return(
         <CartItem{...resturant.data} key={resturant.data.id}/>);
         
