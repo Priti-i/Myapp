@@ -14,7 +14,7 @@ const AppLayout=()=>{
         <>
         <Header/>
         <Outlet/>
-        <link></link>
+       
         </>
     );
 }
