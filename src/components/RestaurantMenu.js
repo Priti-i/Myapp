@@ -1,23 +1,47 @@
 import { useParams } from "react-router-dom";
-import React, { useState,useEffect } from "react";
-const RestaurantMenu=()=>{
-    const {id}=useParams();
-    const [resturant,setresturant]=useState(null);
-    useEffect(()=>{
-        getRestaurantInfo();
-    },[]);
+import React, { useState, useEffect } from "react";
 
-    async function getRestaurantInfo(){
-        const data=await fetch("https://www.swiggy.com/mapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=21.99740&lng=79.00110&restaurantId=658210&submitAction=ENTER");
-        const json =await data.json();
-        console.log(json.data);
-        setresturant(json.data);
-    } 
-    return(
+const RestaurantMenu = () => {
+    const { resId } = useParams(); // Uncomment if resId is needed
+
+    const [restaurant, setRestaurant] = useState(null);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
+
+    useEffect(() => {
+        getRestaurantInfo();
+    }, []);
+
+    async function getRestaurantInfo() {
+    
+            const response = await fetch("https://food-api-beta.vercel.app/service");
+            const data = await response.json();
+            console.log(data);
+            setRestaurant(data.data)
+
+
+            const selectedRestaurant = data.find(item => item.data.id === resId);
+            if (selectedRestaurant) {
+                setRestaurant(selectedRestaurant.data);
+            }
        
-        <>
-        <h1>Resturent id :{id}</h1>
-        </>
-    );
-}
+        
+        }
+
+        return (
+            <>
+                <h1>{restaurant?.name}</h1>
+                <img src={restaurant?.imagee} alt={restaurant?.name} width="300" />
+                <h3>Area: {restaurant?.area}</h3>
+                <h3>Rating: {restaurant?.rating}</h3>
+                <h4>Cuisines:</h4>
+                <ul>
+                    {restaurant?.cuesine?.map((cuisine, index) => (
+                        <li key={index}>{cuisine}</li>
+                    ))}
+                </ul>
+            </>
+        );
+    };
+
 export default RestaurantMenu;

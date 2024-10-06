@@ -9,12 +9,13 @@ import Contact from"./components/Contact.js";
 import  RestaurantMenu from"./components/RestaurantMenu.js"; 
 
 
+
 const AppLayout=()=>{
     return(
         <>
         <Header/>
-        <Outlet/>
-       
+        <Outlet/> 
+    
         </>
     );
 }
@@ -37,8 +38,9 @@ const AppLayout=()=>{
         element:<Contact/>
     },
     {
-        path:"/restaurants/:id",
+        path:"/RestaurantMenu/:resId",
         element:<RestaurantMenu/>
+        
     },
     ],
     },
