@@ -6,7 +6,8 @@ import { createBrowserRouter,RouterProvider ,Outlet} from "react-router-dom";
 import About from "./components/About.js";
 import Error from"./components/Error.js"; 
 import Contact from"./components/Contact.js"; 
-import  RestaurantMenu from"./components/RestaurantMenu.js"; 
+import  RestaurantMenu from"./components/RestaurantMenu.js";
+import Footer from "./components/Footer.js"; 
 
 
 
@@ -15,7 +16,7 @@ const AppLayout=()=>{
         <>
         <Header/>
         <Outlet/> 
-    
+       <Footer/>
         </>
     );
 }
