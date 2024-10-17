@@ -8,7 +8,7 @@ import Error from"./components/Error.js";
 import Contact from"./components/Contact.js"; 
 import  RestaurantMenu from"./components/RestaurantMenu.js";
 import Footer from "./components/Footer.js"; 
-
+import Profile from "./components/FunctionalBased.js";
 
 
 const AppLayout=()=>{
@@ -32,7 +32,13 @@ const AppLayout=()=>{
     },
     {
         path:"/About",
-        element:<About/>
+        element:<About/>,
+        children:[
+        {
+        path:"profile",
+        element:<Profile/>
+    },
+        ],
     },
     {
         path:"/Contact",
