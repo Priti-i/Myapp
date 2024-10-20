@@ -19,9 +19,8 @@ class About extends Component
         return(
             <div>
             <h1>About Us Page</h1>
-            <p>this  is a about us age for food villa</p>
-           
-               <Myprofile name={"Yadav Priti"}/>
+            <p>This  is a about us age for food villa</p>
+              <Myprofile name={"Yadav Priti"}/>
             </div>
         )
     }
