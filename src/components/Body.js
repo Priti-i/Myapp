@@ -4,13 +4,9 @@ import ReactDOM from "react-dom/client";
 import CartItem from "./Cartitem.js";
 import Shimmer from "./Shimmer.js";
 import { Link } from "react-router-dom";
+import {filterData} from "../utils/search"
+import useOnline from "../utils/useOnline.js";
 
-function filterData(searchText, restaurants) {
-  const filtered = restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
-  return filtered;
-}
 
 const Body = () => {
   const [allResto, setallResto] = useState([]);
@@ -28,6 +24,13 @@ const Body = () => {
     setallResto(json); // Adjust based on the actual API structure
     setfilterRestoList(json);
   }
+  // online offline
+  const isOnline=useOnline(); 
+  if (!isOnline) {
+    alert("You are offline");
+    return null; // or any other fallback UI element if needed
+}
+
 
   if (!allResto) return null; // not render component
 
@@ -56,7 +59,10 @@ const Body = () => {
 
       <div className="cardView">
         {filterRestoList.map((resturant) => {
-          return<Link to={`/RestaurantMenu/${resturant.data.id}`}> <CartItem {...resturant.data}  /></Link>;
+          //When clicked, this <Link> navigates to the specific menu page for that restaurant, identified by its id.
+          return<Link to={`/RestaurantMenu/${resturant.data.id}`}> 
+          
+          <CartItem {...resturant.data}  /></Link>;
         })}
       </div>
     </>
