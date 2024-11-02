@@ -1,4 +1,4 @@
-
+export const API_URL="https://food-api-beta.vercel.app/service";
 
 //config drivan UI
 export const restaurantList = [

@@ -1,32 +1,16 @@
 import { useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import useRestaurant from "../utils/useRestaurant";
 
 const RestaurantMenu = () => {
     const { resId } = useParams(); // Uncomment if resId is needed
 
-    const [restaurant, setRestaurant] = useState(null);
+    //const [restaurant, setRestaurant] = useState(null);
     // const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(null);
+    const restaurant=useRestaurant(resId);
 
-    useEffect(() => {
-        getRestaurantInfo();
-    }, []);
-
-    async function getRestaurantInfo() {
-    
-            const response = await fetch("https://food-api-beta.vercel.app/service");
-            const data = await response.json();
-            console.log(data);
-            setRestaurant(data.data)
-
-
-            const selectedRestaurant = data.find(item => item.data.id === resId);
-            if (selectedRestaurant) {
-                setRestaurant(selectedRestaurant.data);
-            }
-       
-        
-        }
+   
 
         return (
             <>
