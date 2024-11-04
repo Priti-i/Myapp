@@ -14,6 +14,7 @@ const RestaurantMenu = () => {
 
         return (
             <>
+            <div className="flex">
                 <h1>{restaurant?.name}</h1>
                 <img src={restaurant?.imagee} alt={restaurant?.name} width="300" />
                 <h3>Area: {restaurant?.area}</h3>
@@ -24,6 +25,7 @@ const RestaurantMenu = () => {
                         <li key={index}>{cuisine}</li>
                     ))}
                 </ul>
+                </div>
             </>
         );
     };
