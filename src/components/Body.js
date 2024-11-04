@@ -38,8 +38,8 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search">
-        <input
+      <div>
+        <input className="bg-yellow-200 border-solid  p-2"
           type="text"
           placeholder="search"
           value={searchText}
@@ -47,17 +47,15 @@ const Body = () => {
             setSearchText(e.target.value);
           }} // The purpose is to update a state variable that holds the current value of the input field.
         />
-      </div>
-      <button
+      
+      <button className="bg-orange-400 rounded-sm p-2"
         onClick={() => {
           const result = filterData(searchText, allResto);
           setfilterRestoList(result);
-        }}
-      >
-        search
-      </button>
+        }}>search</button>
+        </div>
 
-      <div className="cardView">
+      <div className="flex flex-wrap">
         {filterRestoList.map((resturant) => {
           //When clicked, this <Link> navigates to the specific menu page for that restaurant, identified by its id.
           return<Link to={`/RestaurantMenu/${resturant.data.id}`}> 
